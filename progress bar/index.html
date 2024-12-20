@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Progress Bar</title>
+</head>
+
+<body id="main" class="flex flex-col gap-6 items-center justify-center h-screen w-full bg-zinc-800 text-white">
+  <h1 class="text-5xl font-bold text-center">Progress Bar</h1>
+  <div
+    class="progress-bar bg-zinc-600 w-[400px] h-12 rounded-lg border border-zinc-500 overflow-hidden relative flex items-center justify-start">
+    <div class="absolute z-20 flex items-center justify-center w-full">
+      <span class="progress-bar-value">0%</span>
+    </div>
+    <div
+      class="progress-bar-fill transition-all max-w-[98%] duration-300 bg-blue-400 h-10 ml-1 rounded-lg absolute z-10">
+    </div>
+  </div>
+  <div class="flex gap-4 items-center justify-center mb-4">
+    <input id="field" type="number" placeholder="Type progress (0%)"
+      class="w-full p-2 rounded-lg outline-none border border-white/30 bg-transparent [&::-webkit-inner-spin-button]:appearance-none" />
+    <button id="uploadBtn" class="bg-blue-400 border border-blue-600 px-4 py-2 rounded-lg">
+      Upload
+    </button>
+  </div>
+  <!-- scripts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./app.js"></script>
+</body>
+
+</html>

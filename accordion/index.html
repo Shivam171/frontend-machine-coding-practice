@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accordion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-10 flex flex-col gap-5 items-center justify-center h-screen w-full bg-zinc-800 text-white">
+  <h1 class="text-5xl font-bold text-center">Accordion</h1>
+  <div class="flex flex-col gap-4 w-[400px] bg-zinc-900 rounded-lg p-4 overflow-hidden">
+    <!-- 1st Accordion -->
+    <div>
+      <button class="accordion px-4 py-2 text-left bg-zinc-500 rounded-lg w-full">
+        Accordion-1
+      </button>
+      <p class="text-sm p-2 duration-300 hidden">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia
+        officiis ipsam rerum quos, accusantium officia consequatur dignissimos
+        aperiam expedita commodi repellat tenetur illum. Perferendis voluptas
+        minima enim alias praesentium aspernatur quasi ab possimus odio earum,
+        dolores, laudantium et vero corrupti?
+      </p>
+    </div>
+    <!-- 2nd Accordion -->
+    <div>
+      <button class="accordion px-4 py-2 text-left bg-zinc-500 rounded-lg w-full">
+        Accordion-2
+      </button>
+      <p class="text-sm p-2 duration-300 hidden">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia
+        officiis ipsam rerum quos, accusantium officia consequatur dignissimos
+        aperiam expedita commodi repellat tenetur illum. Perferendis voluptas
+        minima enim alias praesentium aspernatur quasi ab possimus odio earum,
+        dolores, laudantium et vero corrupti?
+      </p>
+    </div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+
+</html>
