@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String Transformers</title>
+</head>
+
+<body id="body" class="flex light flex-col gap-6 items-center justify-center h-screen bg-zinc-800 text-white w-full">
+    <h1 class="text-5xl font-bold text-center">String Transformers</h1>
+    <div class="flex flex-col w-[35rem] px-10">
+        <input type="text" name="userInput" value="this is a normal sentence to transform"  placeholder="enter the sentence with spaces (alphanumeric)" id="userInput" autocomplete="off"
+            class="w-full p-3 rounded-lg outline-none text-black font-semibold">
+        <div class="flex flex-col mt-5 gap-5">
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Lower Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="lowercase">
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Upper Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="uppercase">
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Camel Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="camelcase">
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Pascal Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="pascalcase">
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Snake Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="snakecase">
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Kebab Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="kebabcase">
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute text-black px-2 -top-[10px] bg-yellow-400 rounded-r-lg">Trim Case</div>
+                <div class="bg-white text-black p-4 text-lg" id="trimcase">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

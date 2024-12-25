@@ -5,11 +5,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
+    <style>
+        .container input {
+            font-size: 2.5rem;
+            color: #000;
+            outline: none;
+            font-weight: bold;
+        }
+
+        .container button {
+            padding: 1rem 2rem;
+            background-color: #151618;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .container button:hover {
+            background-color: #1f2023;
+        }
+    </style>
 </head>
 
 <body class="flex flex-col gap-6 items-center justify-center h-screen w-full bg-zinc-800 text-white">
     <h1 class="text-5xl font-bold text-center">Calculator</h1>
-    <div class=""></div>
+    <div class="container flex flex-col gap-2 bg-zinc-700 p-4 rounded-lg w-96">
+        <input type="text" placeholder="0" readonly name="display" id="display" class="p-4 rounded-lg" />
+        <div class="w-full flex gap-2 items-center justify-center">
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="w-full flex gap-2 items-center justify-center">
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div class="w-full flex gap-2 items-center justify-center">
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="w-full flex gap-2 items-center justify-center">
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('^2')">x&sup2</button>
+        </div>
+        <div class="w-full flex gap-2 items-center justify-center">
+            <button onclick="appendToDisplay('sqrt')">&#8730</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="clearDisplay()">Clear</button>
+        </div>
+    </div>
     <!-- scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./app.js"></script>
