@@ -1,4 +1,6 @@
 {
     "github.copilot.enable": false,
-    "codeium.enable": false
+    "codeium.enableConfig": {
+        "*": false
+    }
 }

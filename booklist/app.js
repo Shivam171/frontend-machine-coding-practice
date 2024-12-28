@@ -1,134 +1,160 @@
-// Class Book
 class Book {
-    constructor(title, author, bid) {
-        this.title = title,
+    constructor(bid, author, title) {
+        this.bid = bid,
             this.author = author,
-            this.bid = bid
+            this.title = title
     }
 }
 
-// Class UI
 class UI {
-    static displayBooks() {
-        // const StaticData = [
+    static displayBook() {
+        // const static_data = [
         //     {
-        //         bid: 1,
-        //         title: "The man who sold his ferrari",
-        //         author: "John Wick"
+        //         "bid": 110,
+        //         "author": "Jhonny Cage",
+        //         "title": "Ghost Rider"
         //     },
         //     {
-        //         bid: 2,
-        //         title: "Solar Eclipse",
-        //         author: "Einstein"
+        //         "bid": 111,
+        //         "author": "Tom Riddle",
+        //         "title": "Mad Max"
         //     }
         // ]
-
-        // const books = StaticData
-        const books = Store.getStoreBooks();
+        // const books = static_data;
+        const books = Store.fetchBooks();
         books.forEach((book) => {
-            UI.addBooksToList(book);
+            UI.addBooksToList(book)
         })
     }
     static addBooksToList(book) {
-        const bookList = document.querySelector("#book-list")
-        const row = document.createElement("tr")
+        const bookList = document.getElementById('book-list');
+        const row = document.createElement('tr');
         row.innerHTML = `
             <td>${book.bid}</td>
             <td>${book.title}</td>
             <td>${book.author}</td>
-            <td><a href="#" class="delete bg-red-400 rounded-lg px-4 py-2 text-white">X</a></td>
+            <td>
+                <a href="#" class="edit px-4 py-2 text-blue-400">Edit</a>
+            </td>
+            <td>
+                <a href="#" class="delete px-4 py-2 text-red-400">Delete</a>
+            </td>
         `
-        bookList.appendChild(row)
+        bookList.appendChild(row);
     }
     static showAlert(message, type) {
         const div = document.createElement('div');
-        if (type === "warning") {
-            div.className = `text-yellow-400 mt-6 alert`
-        } else if (type === "success") {
+        if (type === "success") {
             div.className = `text-green-400 mt-6 alert`
         } else if (type === "danger") {
             div.className = `text-red-400 mt-6 alert`
         }
-        div.appendChild(document.createTextNode(message))
-        const container = document.querySelector(".container")
-        const form = document.querySelector("#form")
-        container.insertBefore(div, form)
+        div.appendChild(document.createTextNode(message));
+        const container = document.querySelector('.container');
+        const form = document.getElementById('form');
+        container.insertBefore(div, form);
         setTimeout(() => {
-            document.querySelector(".alert").remove()
+            document.querySelector('.alert').remove()
         }, 1000)
     }
-    static deleteBook(el) {
-        if (el.classList.contains("delete")) {
-            el.parentElement.parentElement.remove();
-        }
+    static removeBook(el) {
+        el.parentElement.parentElement.remove();
+        UI.showAlert("Book Removed", "success")
+    }
+    static updateBook(el) {
+        const rowAuthor = el.parentElement.previousElementSibling.textContent;
+        const rowTitle = el.parentElement.previousElementSibling.previousElementSibling.textContent;
+        const rowBid = el.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+
+        const fieldTitle = document.getElementById('title');
+        const fieldAuthor = document.getElementById('author');
+        const fieldBid = document.getElementById('bid');
+        const submitBtn = document.getElementById('submit');
+
+        fieldAuthor.value = rowAuthor;
+        fieldTitle.value = rowTitle;
+        fieldBid.value = rowBid;
+
+        submitBtn.textContent = 'Update Book'
     }
     static clearFields() {
-        document.getElementById("title").value = "";
-        document.getElementById("author").value = "";
-        document.getElementById("bid").value = "";
+        const form = document.getElementById('form');
+        form.reset();
     }
 }
 
 class Store {
-    static getStoreBooks() {
+    static fetchBooks() {
         let books = [];
-        if (localStorage.getItem("books") === null) {
+        const storedBooks = localStorage.getItem('books');
+        if (!storedBooks || storedBooks === "null") {
             books = [];
         } else {
-            books = JSON.parse(localStorage.getItem("books"))
+            books = JSON.parse(storedBooks)
         }
         return books;
     }
-    static addStoreBook(book) {
-        const books = Store.getStoreBooks();
+    static saveBook(book) {
+        const books = Store.fetchBooks();
         books.push(book);
-        localStorage.setItem("books", JSON.stringify(books))
+        localStorage.setItem('books', JSON.stringify(books))
     }
-    static removeStoreBook(bid) {
-        const books = Store.getStoreBooks();
-        books.forEach((book, index) => {
-            if (book.bid === bid) {
-                books.splice(index, 1);
-            }
+    static deleteBook(bid) {
+        const books = Store.fetchBooks();
+        const updatedBook = books.filter((book) => {
+            book.id != bid
         })
-        localStorage.setItem('books', JSON.stringify(books));
+        localStorage.setItem('books', JSON.stringify(updatedBook));
+    }
+    static modifyBook(book) {
+        try {
+            const storeBooks = Store.fetchBooks();
+            const updateBooks = storeBooks.map((sb) => sb.bid == book.bid ? book : sb);
+            localStorage.setItem("books", JSON.stringify(updateBooks));
+            // Clear and re-render
+            document.getElementById('book-list').innerHTML = '';
+            UI.displayBook();
+            UI.showAlert("Book Updated", "success")
+        } catch (err) {
+            UI.showAlert("Error while modifying data", "danger");
+            console.log("Error while modifying data", err);
+        }
     }
 }
 
-// Events: Add book
-document.getElementById("form").addEventListener("submit", (e) => {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", UI.displayBook);
 
-    // Get form field values
-    const title = document.getElementById("title").value
-    const author = document.getElementById("author").value
-    const bid = document.getElementById("bid").value
-    // Validate the form
-    if (title === "" || author === "" | bid === "") {
-        UI.showAlert("⚠️ Please fill in all the fields", "warning")
+document.getElementById('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const bid = document.getElementById('bid').value;
+    const submitBtn = document.getElementById('submit');
+
+    if (bid.trim() === "" || author.trim() === "" || title.trim() === "") {
+        UI.showAlert("All fields are mandatory", "danger");
         return;
     }
-    // Instantiate the Book
-    const book = new Book(title, author, bid)
-    // Adding book to list
-    UI.addBooksToList(book);
-    // Add book to store
-    Store.addStoreBook(book);
-    // Success alert
-    UI.showAlert("✅ Book Added", "success");
-    // Clear form
-    UI.clearFields()
+    const book = new Book(bid, author, title);
+
+    if (submitBtn.textContent === "Update Book") {
+        Store.modifyBook(book);
+        submitBtn.textContent = 'Add Book';
+        UI.clearFields();
+    } else {
+        UI.addBooksToList(book);
+        Store.saveBook(book);
+        UI.clearFields();
+        UI.showAlert("Book Added", "success")
+    }
 })
 
-// Events: Display books
-document.addEventListener("DOMContentLoaded", UI.displayBooks)
-
-// Events: Remove book btn
-document.querySelector("#book-list").addEventListener("click", (e) => {
+document.querySelector('#book-list').addEventListener('click', (e) => {
     e.preventDefault();
-    UI.deleteBook(e.target);
-    Store.removeStoreBook(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
-    UI.showAlert("🗑️ Book Removed", "danger")
+    if (e.target.classList.contains('delete')) {
+        UI.removeBook(e.target)
+        Store.deleteBook(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling)
+    } else if (e.target.classList.contains('edit')) {
+        UI.updateBook(e.target)
+    }
 })
-
-

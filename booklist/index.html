@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyBookList App</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyBookList App</title>
-</head>
-
-<body class="container bg-zinc-900 p-10">
-  <h1 id="header" class="text-white font-bold text-3xl">MyBookList App</h1>
-  <!-- form -->
-  <form id="form" class="mt-4 flex flex-col gap-4">
-    <div class="form-group">
-      <label for="title" class="text-white">Title</label>
-      <input type="text" name="title" id="title" placeholder="Enter you book title" />
-    </div>
-    <div class="form-group">
-      <label for="author" class="text-white">Author</label>
-      <input type="text" name="author" id="author" placeholder="Enter you book author" />
-    </div>
-    <div class="form-group">
-      <label for="bid" class="text-white">Bid</label>
-      <input type="text" name="bid" id="bid" placeholder="Bid" />
-    </div>
-    <button type="submit" class="bg-zinc-800 text-white font-bold py-2 px-4 rounded-xl">
-      Add Book
-    </button>
-  </form>
-  <table>
-    <tr>
-      <th>Bid</th>
-      <th>Title</th>
-      <th>Author</th>
-    </tr>
-    <tbody id="book-list"></tbody>
-  </table>
-  <!-- script -->
-  <link rel="stylesheet" href="./style.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="./app.js"></script>
-</body>
-
+  <body class="container bg-zinc-900 p-10">
+    <h1 id="header" class="text-white font-bold text-3xl">MyBookList App</h1>
+    <!-- form -->
+    <form id="form" class="mt-4 flex flex-col gap-4">
+      <div class="form-group">
+        <label for="title" class="text-white">Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Enter you book title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="author" class="text-white">Author</label>
+        <input
+          type="text"
+          name="author"
+          id="author"
+          placeholder="Enter you book author"
+        />
+      </div>
+      <div class="form-group">
+        <label for="bid" class="text-white">Bid</label>
+        <input type="text" name="bid" id="bid" placeholder="Bid" />
+      </div>
+      <button
+        id="submit"
+        type="submit"
+        class="bg-zinc-800 text-white font-bold py-2 px-4 rounded-xl"
+      >
+        Add Book
+      </button>
+    </form>
+    <table>
+      <tr>
+        <th>Bid</th>
+        <th>Title</th>
+        <th>Author</th>
+      </tr>
+      <tbody id="book-list"></tbody>
+    </table>
+    <!-- script -->
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./app.js"></script>
+  </body>
 </html>
